@@ -20,6 +20,7 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
+{/* I can here change nothing, because test say 'should have a Home link with `is-active` class */}
             <Link
               to="/"
               className={classNames('navbar-item', {
@@ -28,6 +29,7 @@ export const App = () => {
             >
               Home
             </Link>
+{/* And here test say 'should have Tabs link without `is-active` class' */}
             <Link
               to="/tabs"
               className={classNames('navbar-item', {
