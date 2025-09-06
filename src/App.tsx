@@ -3,19 +3,17 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import './App.scss';
 import { TabsPage } from './components/TabsPage';
 import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import classNames from 'classnames';
 
 const HomePage = () => <h1 className="title">Home page</h1>;
 
 const NotFoundPage = () => <h1 className="title">Page not found</h1>;
 
 export const App = () => {
-  const location = useLocation();
-
-  const isTabsActive = location.pathname.startsWith('/tabs');
+  const { pathname } = useLocation();
 
   return (
     <>
-      {/* Also requires <html class="has-navbar-fixed-top"> */}
       <nav
         className="navbar is-light is-fixed-top is-mobile has-shadow"
         data-cy="Nav"
@@ -24,13 +22,17 @@ export const App = () => {
           <div className="navbar-brand">
             <Link
               to="/"
-              className={`navbar-item${location.pathname === '/' ? ' is-active' : ''}`}
+              className={classNames('navbar-item', {
+                'is-active': pathname === '/',
+              })}
             >
               Home
             </Link>
             <Link
               to="/tabs"
-              className={`navbar-item${isTabsActive ? ' is-active' : ''}`}
+              className={classNames('navbar-item', {
+                'is-active': pathname.startsWith('/tabs'),
+              })}
             >
               Tabs
             </Link>
